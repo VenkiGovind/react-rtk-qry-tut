@@ -15,6 +15,7 @@ import { MemberDetails } from "./member-detalis";
 import { IMember, IMemberSubsData } from "../../model/member";
 import { MemberContext, MemberSubsCnxt } from "../../model/context/member.provider";
 import { AppCnxt } from "../../model/context/stateContext";
+import { SearchField } from "../../components/search-field";
 
 const style = {
   marginTop: '1.5rem',
@@ -58,7 +59,8 @@ export const MemberList = (props: {member: IMember[]}) => {
   return (
     <Container>
       <Box>
-
+        Enter Search: 
+        <SearchField/>
         <Grid style={style} container spacing={2}>
           <Grid style={style1} item md={2} xs={12}>asdfasdf</Grid>
           <Grid style={style2} item md={8} xs={12}>

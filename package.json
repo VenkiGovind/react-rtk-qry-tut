@@ -26,10 +26,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3030 react-scripts start",
-    "build": "react-scripts build",
+    "start": "yarn run loadDevConfg && PORT=3030 react-scripts start",
+    "build:test": "yarn run loadTestConfg && react-scripts build",
+    "build:prod": "yarn run loadProdConfg && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "loadDevConfg": "cp src/config/config.dev.ts src/config/config.ts",
+    "loadTestConfg": "cp src/config/config.test.ts src/config/config.ts",
+    "loadProdConfg": "src/config/cp config.prod.ts src/config/config.ts"
   },
   "eslintConfig": {
     "extends": [
