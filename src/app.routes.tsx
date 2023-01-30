@@ -8,6 +8,7 @@ import { MemberList } from './features/member/member';
 import { RoutedMemberDetails } from "./features/member/route-member-details";
 import { PageNotFound } from "./features/page-not-found";
 import { PostHome } from "./features/posts/posts-home";
+import { PlanHome } from "./features/insurance-plan/plan-home";
 
 export const appRoutes: RouteObject = {
   path: '/',
@@ -24,6 +25,10 @@ export const appRoutes: RouteObject = {
     {
       path: 'post',
       element: <PostHome/>
+    },
+    {
+      path: 'plan',
+      element: <PlanHome/>
     },
     {
       path: 'member',

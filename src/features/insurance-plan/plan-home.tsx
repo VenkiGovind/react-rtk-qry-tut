@@ -1,50 +1,24 @@
 import { Avatar, Box, Button, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material"
 import CssBaseline from '@mui/material/CssBaseline';
 import { Container } from "@mui/system"
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchField } from "../../components/search-field"
-import { IPost, useFetchPostQuery, useFetchPostsQuery, useFetchRicardoQuery,useFetchRicardosQuery } from "./+state/post-api-slice";
-import CommentIcon from '@mui/icons-material/Comment';
+import { IPlan, useFetchPlanByIdQuery, useFetchPlansQuery  } from "./+state/plan-api-slice";
+import MedicationIcon from '@mui/icons-material/Medication';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { ContainerBar } from "../../components/container-bar";
-import { AppDispatch } from '../../state/store'
 
-export const PostHome = () => {
-  const [postId, setPostId] = useState(0);
-  const [filteredPosts, setFilteredPosts] = useState<IPost[] | undefined>([]);
-  const { data: post, isFetching: isLoadnigPost } = useFetchPostQuery(postId);
-  const { data: posts, isFetching: isFetchingPosts } = useFetchPostsQuery();
+export const PlanHome = () => {
 
+  const [planId, setPlanId] = useState(0);
 
-  const { data: ricardoList, isFetching: fetchingRicarodos, refetch } = useFetchRicardosQuery();
+  const { data: plans, isFetching: fetchingPlans, refetch } = useFetchPlansQuery();
+  const { data: plan, isFetching: fetchingPlan } = useFetchPlanByIdQuery(planId);
 
-  const [ricardoId, setRicardoId] = useState(0);
-  const [searchId, setSearchId] = useState(0);
+  const highlight = {
+    border: '4px solid green'
+  }
   
-  
-
-  useEffect(() => {
-    console.log(posts)
-    setFilteredPosts(posts);
-    return () => {
-      //
-    }
-  }, [posts])
-
-  useEffect(() => {
-    if (postId > 0) {
-
-      const selectedPost = posts?.filter(post => post.id === postId);
-      setFilteredPosts(selectedPost);
-    } else {
-      setFilteredPosts(posts);
-    }
-    return () => {
-      //
-    }
-  }, [postId])
-
-
   return (
     <>
       <CssBaseline />      
@@ -56,24 +30,25 @@ export const PostHome = () => {
       </ContainerBar>
         <Container sx={{ mt: 5 }}>
           <Typography variant="h3">
-            Posts
+            Plans
           </Typography>
         </Container>
         <Container sx={{ mt: 1 }}>
-          Enter post ID to fetch: &nbsp;
-          <SearchField onChange={(e) => {
-            setPostId(Number(e.target.value));
+          Enter Plan ID to fetch: &nbsp;
+          <SearchField onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setPlanId(Number(e.target.value));
           }}></SearchField>
+        
         </Container>
         <Container sx={{ mt: 2 }}>
-          <Typography variant="h5">Search results</Typography>
+          
           <List>
             {
-              filteredPosts?.map((post: IPost, index: number) => {
-                return <ListItem key={post.id}>
+              plans?.map((planIter: IPlan, index: number) => {
+                return <ListItem key={planIter.id} style={plan?.id === planIter.id ? highlight : {}}>
                   <ListItemAvatar>
                     <Avatar>
-                      <CommentIcon />
+                      <MedicationIcon/>
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -86,7 +61,7 @@ export const PostHome = () => {
                           variant="body2"
                           color="text.primary"
                         >
-                          {post.id}
+                          {planIter.id}
                         </Typography>
                       </>
                     }
@@ -99,7 +74,7 @@ export const PostHome = () => {
                           variant="body2"
                           color="text.primary"
                         >
-                          {post.title}
+                          {planIter.planName}
                         </Typography>
                         <Typography
                           sx={{ display: 'block' }}
@@ -107,7 +82,7 @@ export const PostHome = () => {
                           variant="body2"
                           color="text.primary"
                         >
-                          {post.body}
+                          {planIter.description}
                         </Typography>
                       </>
                     } />

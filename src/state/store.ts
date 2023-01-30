@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { planApiSlice } from '../features/insurance-plan/+state/plan-api-slice';
 import { memberApiSlice } from '../features/member/+state/member-api-slice';
-import memberReducer from '../features/member/+state/member-slice';
 import { postApiSlice } from '../features/posts/+state/post-api-slice';
 
 
 export const store =  configureStore({
   reducer: {
-    member: memberReducer,
     [memberApiSlice.reducerPath]: memberApiSlice.reducer,
-    [postApiSlice.reducerPath]: postApiSlice.reducer
+    [postApiSlice.reducerPath]: postApiSlice.reducer,
+    [planApiSlice.reducerPath]: planApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(memberApiSlice.middleware, postApiSlice.middleware)
+    return getDefaultMiddleware().concat(memberApiSlice.middleware, postApiSlice.middleware, planApiSlice.middleware)
   }
 });
 

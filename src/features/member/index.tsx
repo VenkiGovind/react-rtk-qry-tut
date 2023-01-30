@@ -5,48 +5,15 @@ import App from "../../App"
 import { AppCnxt } from "../../model/context/stateContext"
 import { IMember } from "../../model/member";
 import { MemberList } from "./member"
-import { useAppDispatch, useAppSelector } from '../../state/hooks'
-import { fetchMember, fetchFailure } from './+state/member-slice'
 import { useFetchMembersQuery } from "./+state/member-api-slice";
 
 export const MemberHome = () => {
-
-  // const [member, setMember] = useState<IMember[]>([]);
-  // const { member, setMember} = useContext(AppCnxt)
-
-  const member = useAppSelector((state) => state.member.memberList);
-  const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   var getMembers = async () => {
-  //     //call API:
-  //     const result = await fetch('http://localhost:3000/api/v1/member').then((response) => response.json());
-  //     setMember(result);
-
-  //   };
-
-  //   getMembers();
-  //   return () => {
-  //     //destroy here:
-  //   };
-  // }, []);
-
   const MemberData = [{ "id": 1, "memberCode": "AA0001230012", "firstName": "Venkatesh", "lastName": "Govind", "dob": "1978-10-12T05:00:00.000Z" }, { "id": 2, "memberCode": "AA0001230013", "firstName": "John", "lastName": "Doe", "dob": "1962-07-04T05:00:00.000Z" }, { "id": 3, "memberCode": "AA0001230017", "firstName": "Jane", "lastName": "Doe", "dob": "1982-02-18T06:00:00.000Z" }, { "id": 4, "memberCode": "AA0001230014", "firstName": "Judy", "lastName": "Foster", "dob": "1982-02-18T06:00:00.000Z" }, { "id": 5, "memberCode": "AA0001230015", "firstName": "Karthik", "lastName": "Konda", "dob": "1982-02-18T06:00:00.000Z" }, { "id": 6, "memberCode": "AA0001230016", "firstName": "Ricardo", "lastName": "Figueroa", "dob": "1982-02-18T06:00:00.000Z" }, { "id": 7, "memberCode": "AA0001230018", "firstName": "Armando", "lastName": "Saurez", "dob": "1982-02-18T06:00:00.000Z" }, { "id": 8, "memberCode": "AA0001230023", "firstName": "Eric", "lastName": "Budah", "dob": "1981-06-19T05:00:00.000Z" }, { "id": 9, "memberCode": "AA0001230032", "firstName": "Bruce", "lastName": "Wayne", "dob": "1978-10-12T05:00:00.000Z" }];
 
   // Using the RTK Query based service:
   const { data = [], isFetching, refetch } = useFetchMembersQuery();
 
 
-  // const getMemberAsync = () => {
-  //   var getMembers = async () => {
-  //     //call API:
-  //     const result = await fetch('http://localhost:3000/api/v1/member').then((response) => response.json());
-  //     dispatch(fetchMember(result));
-
-  //   };
-
-  //   getMembers();
-  // }
   return (
     <>
       <Button onClick={() => {

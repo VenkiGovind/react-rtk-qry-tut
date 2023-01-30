@@ -5,7 +5,7 @@ import { buildQueries } from '@testing-library/react';
 import { IMember } from '../../../model/member';
 
 export const memberApiSlice = createApi({
-  reducerPath: 'api',
+  reducerPath: 'memberAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000/api/v1',
   }),
